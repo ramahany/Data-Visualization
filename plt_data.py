@@ -31,9 +31,20 @@ class PlotData:
 
             if self.plot_type == 'hist':
                 # Calculate the number of bins using the Sturges' rule
-                num_bins = int(np.ceil(np.log2(len(self.x))) + 1)
-                # Create histogram counts, bins, patches =
-                self.ax.hist(self.df[self.x], bins=num_bins, edgecolor='black', label='distribution')
+                try:
+
+                    if not is_numeric_dtype(self.df[self.x].dtype):
+                        u = self.df[self.x].unique()
+                        plt.xticks(range(len(u)), u, rotation='vertical')
+                        num_bins = len(u)
+                    else:
+                        num_bins = int(np.ceil(np.log2(len(self.x))) + 1)
+                    # Create histogram counts, bins, patches =
+                    self.ax.hist(self.df[self.x], bins=num_bins, edgecolor='black', label='distribution')
+
+                except Exception as ex:
+                    print(ex)
+
             elif self.plot_type == 'Scatter':
                 if not is_numeric_dtype(self.df[self.x].dtype):
                     try:
@@ -42,8 +53,8 @@ class PlotData:
                         u = self.df[self.x].unique()
                         plt.xticks(range(len(u)), u, rotation='vertical')
 
-                    except:
-                        print(f"An exception occurred{self.x}")
+                    except Exception as ex:
+                        print(f"An exception occurred at {self.x}\n and the exception is: {ex}")
 
                 else:
                     self.ax.scatter(self.df[self.x], self.df[self.y], label=f'{self.y} vs {self.x}')

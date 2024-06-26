@@ -31,7 +31,7 @@ class CreateNote:
         scatter_frm = ttk.Frame(name=f'sctr_frm{index}')
         PlotData(self.df[[item, self.label]], scatter_frm, 'Scatter')
         hist_frm = ttk.Frame(name=f'hist_frm{index}')
-        # PlotData(self.df[[item, self.label]], hist_frm, 'hist')
+        PlotData(self.df[[item, self.label]], hist_frm, 'hist')
         # Data
         datatbl_lblFrm = ttk.Labelframe(self.main_frm, text="Data", name='dataTable_lblFrm', bootstyle="Primary")
         # add data to the frame
@@ -73,18 +73,14 @@ class CreateNote:
             if new_name != '':
                 pass
                 self.df = self.df.rename(columns={old_name: new_name})
-                # TODO : update the label
+                # DONE : update the label
                 self.main_frm.children['name_lbl']['text'] = new_name
-                # TODO : update the table in the note tap
+                # DONE : update the table in the note tap
                 self.dt.configure(columns=[new_name, self.label])
-                print(self.dt)
                 self.dt.destroy()
                 self.create_feature_tbl(self.main_frm.children['dataTable_lblFrm'], new_name)
-
-                # # print(self.df.head(5))
-                # self.Notebook.tab(self.tap_id, text=new_name)
-                # self.dt.config(columns=[new_name, self.label])
                 # TODO : update the main table
+
 
                 change_name_win.destroy()
 

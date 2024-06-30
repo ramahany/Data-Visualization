@@ -23,7 +23,8 @@ class DataVisualizationApp:
         # self.Notebook.place(relx=0.5, rely=0.5, anchor='center', relheight=0.95, relwidth=0.95)
 
     def get_data_path(self):
-        init_dir = 'D:\\! --♥\\projects\\automation\\data_visualization'
+        # init_dir = 'D:\\! --♥\\projects\\automation\\data_visualization'
+        init_dir = 'C:\\Users\\pc\\PycharmProjects\\Data-Visualization'
         title = 'Select csv file'
         file_types = (('text/csv', '*.csv'), ('all files', '*.csv'))
         file_path = filedialog.askopenfilename(initialdir=init_dir, title=title, filetypes=file_types)
@@ -84,7 +85,6 @@ class DataVisualizationApp:
         self.window.wait_window(mini_win)
         return var.get()
         # return ans
-
 
     def create_main_panel(self):
         num_rows = tuple([x for x in range(13)])

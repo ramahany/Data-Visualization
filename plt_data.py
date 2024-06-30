@@ -40,7 +40,7 @@ class PlotData:
                     else:
                         num_bins = int(np.ceil(np.log2(len(self.x))) + 1)
                     # Create histogram counts, bins, patches =
-                    self.ax.hist(self.df[self.x], bins=num_bins, edgecolor='black', label='distribution')
+                    self.ax.hist(self.df[self.x].replace(pd.NA, 'Unknown'), bins=num_bins, edgecolor='black', label='distribution')
 
                 except Exception as ex:
                     print(ex)
@@ -52,15 +52,17 @@ class PlotData:
                                     color='purple', width=0.5, edgecolor='black', lw=1)
                         u = self.df[self.x].unique()
                         plt.xticks(range(len(u)), u, rotation='vertical')
+                        self.ax.set_ylabel(self.y)
 
                     except Exception as ex:
                         print(f"An exception occurred at {self.x}\n and the exception is: {ex}")
 
                 else:
                     self.ax.scatter(self.df[self.x], self.df[self.y], label=f'{self.y} vs {self.x}')
+                    self.ax.set_ylabel(self.y)
 
             self.ax.set_xlabel(self.x)
-            self.ax.set_ylabel(self.y)
+
             self.ax.legend()
 
             # #Set y-axis limits (if needed)

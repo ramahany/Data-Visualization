@@ -12,8 +12,26 @@ class Describe:
         self.frame = frame
         self.description = self.data.describe()
         self.type = self.get_type()
-        lbl = ttk.Label(frame, text=str(self.description)+f'==>>>{self.type}')
-        lbl.place(relx=0.5, rely=0.5, anchor='center')
+        type_lbl = ttk.Label(self.frame, text=self.type, font=(None, 32, 'normal'), bootstyle='secondary')
+
+        if type_lbl == 'Categorical':
+
+            self.show_description_for_categorical()
+        else:
+            self.show_description_for_numerical()
+
+        type_lbl.pack()
 
     def get_type(self):
         return 'Categorical' if not is_numeric_dtype(self.data.dtypes) else 'Numeric'
+
+    def show_description_for_numerical(self):
+        print('Numerical')
+        print(print(self.description))
+        print('===============================')
+
+    def show_description_for_categorical(self):
+        print('Categorical')
+        print(print(self.description))
+        print('===============================')
+
